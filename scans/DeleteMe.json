@@ -1,0 +1,30 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/IdeaProjects/buttons-and-more/force-app/main/default/classes/DeleteMe.cls",
+    "violations": [
+      {
+        "line": 39,
+        "column": 28,
+        "endLine": 39,
+        "endColumn": 32,
+        "severity": 3,
+        "ruleName": "AvoidDebugStatements",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoiddebugstatements",
+        "message": "\nAvoid debug statements since they impact on performance\n"
+      },
+      {
+        "line": 42,
+        "column": 28,
+        "endLine": 42,
+        "endColumn": 32,
+        "severity": 3,
+        "ruleName": "AvoidDebugStatements",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoiddebugstatements",
+        "message": "\nAvoid debug statements since they impact on performance\n"
+      }
+    ]
+  }
+]

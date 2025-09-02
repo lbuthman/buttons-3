@@ -1,0 +1,195 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/IdeaProjects/buttons-and-more/force-app/main/default/classes/OpportunityManagement.cls",
+    "violations": [
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 164,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "ExcessiveParameterList",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#excessiveparameterlist",
+        "message": "\nAvoid long parameter lists.\n"
+      },
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 164,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "NcssMethodCount",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#ncssmethodcount",
+        "message": "\nThe method 'updateOpportunityStages()' has an NCSS line count of 142\n"
+      },
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 164,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'updateOpportunityStages(Set<Id>, List<Opportunity>, Map<Id,List<OpportunityLineItem>>, Map<Id,Decimal>)' has a cognitive complexity of 214, current threshold is 15\n"
+      },
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 164,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'updateOpportunityStages(Set<Id>, List<Opportunity>, Map<Id,List<OpportunityLineItem>>, Map<Id,Decimal>)' has a cyclomatic complexity of 49.\n"
+      },
+      {
+        "line": 26,
+        "column": 21,
+        "endLine": 32,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 26,
+        "column": 21,
+        "endLine": 32,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 26,
+        "column": 21,
+        "endLine": 32,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 36,
+        "column": 21,
+        "endLine": 36,
+        "endColumn": 22,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 46,
+        "column": 25,
+        "endLine": 46,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 66,
+        "column": 25,
+        "endLine": 66,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 84,
+        "column": 29,
+        "endLine": 84,
+        "endColumn": 30,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 106,
+        "column": 21,
+        "endLine": 106,
+        "endColumn": 22,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 118,
+        "column": 25,
+        "endLine": 118,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 121,
+        "column": 29,
+        "endLine": 121,
+        "endColumn": 30,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 129,
+        "column": 21,
+        "endLine": 129,
+        "endColumn": 22,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 137,
+        "column": 21,
+        "endLine": 137,
+        "endColumn": 22,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 146,
+        "column": 25,
+        "endLine": 146,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      }
+    ]
+  }
+]

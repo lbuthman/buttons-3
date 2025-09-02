@@ -1,0 +1,14 @@
+:host {
+    --sds-c-modal-content-color-background: orange;
+    --slds-c-button-radius-border: 0.6rem;
+    --slds-c-button-inverse-text-color: #333;
+        /*--slds-c-button-brand-color-background: #340068;*/
+    /*--slds-c-button-brand-color-background-active: #340068;*/
+    /*--slds-c-button-brand-color-background-hover: #98A6D4;*/
+    /*--slds-c-button-destructive-color-background-hover: #FF6978;*/
+}
+
+/*.outstanding {*/
+/*    color: #666;*/
+/*    text-shadow: 0px 1px 0px #ccc;*/
+/*}*/

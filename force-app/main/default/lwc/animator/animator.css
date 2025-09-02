@@ -1,0 +1,23 @@
+.bobble {
+    animation: bobble 2s infinite;
+}
+
+@keyframes bobble {
+    0% {
+        transform: translateX(10px);
+    }
+    50% {
+        transform: translateX(40px);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+.transition {
+    transition: transform .9s;
+}
+
+.transition:hover {
+    transform: scale3d(1.2, 1.2, 1) rotate(45deg);
+}

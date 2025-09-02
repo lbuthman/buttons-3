@@ -1,0 +1,24 @@
+<template>
+  <lightning-card title='Turtle Racing Game' icon-name='custom:custom63'>
+    <div class='game-area' style='display: flex; flex-direction: column;'>
+      <template for:each={turtles} for:item='turtle'>
+        <div key={turtle.id} class="turtle-lane">
+          <div class="turtle" style={turtle.style}>🐢</div>
+        </div>
+      </template>
+    </div>
+    <lightning-button label='Start Race' onclick={startRace} disabled={isRaceOn} class='slds-m-left_medium'></lightning-button>
+    <lightning-button label='Reset Race' onclick={resetRace} disabled={isRaceOn} class='slds-m-left_small'></lightning-button>
+
+    <template if:true={raceFinished}>
+      <div class='race-results'>
+        <h2>Race Results</h2>
+        <template for:each={turtles} for:item='turtle'>
+          <div key={turtle.id} class={turtle.computedClass}>
+            Turtle {turtle.id}: <strong>{turtle.rank} Place</strong>
+          </div>
+        </template>
+      </div>
+    </template>
+  </lightning-card>
+</template>

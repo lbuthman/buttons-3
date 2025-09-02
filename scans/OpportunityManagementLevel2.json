@@ -1,0 +1,96 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/IdeaProjects/buttons-and-more/force-app/main/default/classes/OpportunityManagementLevel2.cls",
+    "violations": [
+      {
+        "line": 3,
+        "column": 24,
+        "endLine": 53,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'complexAccountMerge(List<Id>, Id)' has a cyclomatic complexity of 10.\n"
+      },
+      {
+        "line": 10,
+        "column": 38,
+        "endLine": 10,
+        "endColumn": 101,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 16,
+        "column": 47,
+        "endLine": 16,
+        "endColumn": 122,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 22,
+        "column": 37,
+        "endLine": 22,
+        "endColumn": 109,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 36,
+        "column": 45,
+        "endLine": 38,
+        "endColumn": 13,
+        "severity": 3,
+        "ruleName": "EmptyStatementBlock",
+        "category": "Error Prone",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_errorprone.html#emptystatementblock",
+        "message": "\nAvoid empty block statements.\n"
+      },
+      {
+        "line": 36,
+        "column": 13,
+        "endLine": 36,
+        "endColumn": 14,
+        "severity": 3,
+        "ruleName": "EmptyIfStmt",
+        "category": "Error Prone",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_errorprone.html#emptyifstmt",
+        "message": "\nAvoid empty if statements\n"
+      },
+      {
+        "line": 42,
+        "column": 35,
+        "endLine": 44,
+        "endColumn": 13,
+        "severity": 3,
+        "ruleName": "EmptyStatementBlock",
+        "category": "Error Prone",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_errorprone.html#emptystatementblock",
+        "message": "\nAvoid empty block statements.\n"
+      },
+      {
+        "line": 42,
+        "column": 13,
+        "endLine": 42,
+        "endColumn": 14,
+        "severity": 3,
+        "ruleName": "EmptyIfStmt",
+        "category": "Error Prone",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_errorprone.html#emptyifstmt",
+        "message": "\nAvoid empty if statements\n"
+      }
+    ]
+  }
+]

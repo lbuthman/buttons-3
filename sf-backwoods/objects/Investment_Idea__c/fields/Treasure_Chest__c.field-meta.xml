@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Treasure_Chest__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Determines the available time investment values for selection.</description>
+    <externalId>false</externalId>
+    <label>Treasure Chest</label>
+    <referenceTo>Lead</referenceTo>
+    <relationshipLabel>Investment Ideas</relationshipLabel>
+    <relationshipName>Investment_Ideas</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

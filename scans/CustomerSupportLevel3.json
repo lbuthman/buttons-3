@@ -1,0 +1,129 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/IdeaProjects/buttons-and-more/force-app/main/default/classes/CustomerSupportLevel3.cls",
+    "violations": [
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 63,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'processAccountContactHierarchy()' has a cognitive complexity of 102, current threshold is 15\n"
+      },
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 63,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'processAccountContactHierarchy()' has a cyclomatic complexity of 19.\n"
+      },
+      {
+        "line": 2,
+        "column": 24,
+        "endLine": 63,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "NcssMethodCount",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#ncssmethodcount",
+        "message": "\nThe method 'processAccountContactHierarchy()' has an NCSS line count of 45\n"
+      },
+      {
+        "line": 12,
+        "column": 29,
+        "endLine": 12,
+        "endColumn": 30,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 25,
+        "column": 57,
+        "endLine": 25,
+        "endColumn": 81,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 27,
+        "column": 82,
+        "endLine": 27,
+        "endColumn": 137,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 28,
+        "column": 68,
+        "endLine": 28,
+        "endColumn": 72,
+        "severity": 3,
+        "ruleName": "AvoidDebugStatements",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoiddebugstatements",
+        "message": "\nAvoid debug statements since they impact on performance\n"
+      },
+      {
+        "line": 31,
+        "column": 61,
+        "endLine": 31,
+        "endColumn": 75,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 51,
+        "column": 21,
+        "endLine": 51,
+        "endColumn": 31,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 52,
+        "column": 47,
+        "endLine": 52,
+        "endColumn": 102,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 55,
+        "column": 25,
+        "endLine": 55,
+        "endColumn": 33,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      }
+    ]
+  }
+]

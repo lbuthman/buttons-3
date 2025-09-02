@@ -1,0 +1,24 @@
+<apex:page id="PetHatcher" controller="PetHatcherController">
+  <apex:form>
+    <apex:pageBlock title="Hatched Pets">
+      <apex:pageBlockTable value="{!hatchedPets}" var="pet">
+        <apex:column value="{!pet}"/>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Eggs">
+      <apex:selectList value="{!selectedEgg}" size="1">
+        <apex:selectOptions value="{!eggOptions}"/>
+      </apex:selectList>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Hatching Potions">
+      <apex:selectList value="{!selectedPotion}" size="1">
+        <apex:selectOptions value="{!potionOptions}"/>
+      </apex:selectList>
+    </apex:pageBlock>
+
+    <apex:commandButton value="Hatch Pet" action="{!hatchPet}"/>
+    <apex:outputText value="{!hatchingResult}"/>
+  </apex:form>
+</apex:page>

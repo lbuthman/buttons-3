@@ -1,0 +1,25 @@
+.geeks {
+    width: 20px;
+    height: 20px;
+    background: green;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgb(127, 153, 127),
+    0 0 40px rgb(127, 153, 127),
+    0 0 60px rgb(127, 153, 127),
+    0 0 80px rgb(127, 153, 127),
+    0 0 120px rgb(127, 153, 127),
+    0 0 220px rgb(127, 153, 127),
+    0 0 320px rgb(127, 153, 127);
+    transition: 2s;
+}
+
+.freaks {
+    box-shadow: 0 0 0 30px rgb(83, 224, 83),
+    0 0 0 60px rgb(83, 224, 83),
+    0 0 0 100px rgb(83, 224, 83),
+    0 0 0 120px rgb(82, 226, 82),
+    0 0 0 200px rgb(37, 214, 37),
+    0 0 0 400px rgb(27, 165, 27),
+    0 0 0 450px rgb(63, 235, 63);
+    transition: 2s;
+}

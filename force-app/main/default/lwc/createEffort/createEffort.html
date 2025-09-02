@@ -1,0 +1,41 @@
+<template>
+  <lightning-quick-action-panel header="Log Your Effort">
+    <template if:false={effortCompleted}>
+      <lightning-layout horizontal-align="center" vertical-align="center" class="slds-p-around_medium">
+        <lightning-layout-item>
+          <p class="slds-text-heading_small">Started:&nbsp;&nbsp;</p>
+        </lightning-layout-item>
+        <lightning-layout-item>
+          <p class="slds-text-font_monospace">{startTime}</p>
+        </lightning-layout-item>
+      </lightning-layout>
+
+      <lightning-layout horizontal-align="center" pull-to-boundary="medium" class="slds-p-bottom_x-small">
+        <lightning-layout-item size="8">
+          <lightning-input type="text"
+                           label="Context"
+                           onchange={handleContextInput}
+                           data-id="context">
+          </lightning-input>
+        </lightning-layout-item>
+      </lightning-layout>
+
+      <lightning-layout horizontal-align="center" class="slds-p-around_x-small">
+        <lightning-layout-item>
+          <span class="slds-text-heading_label">Temp Notes</span>
+          <lightning-input-rich-text label="Temp Notes" onchange={handleTempNoteInput}></lightning-input-rich-text>
+        </lightning-layout-item>
+      </lightning-layout>
+
+      <lightning-layout horizontal-align="center" class="slds-p-bottom_medium slds-p-top_small">
+        <lightning-button label="End Effort" variant="brand" onclick={handleEndEffort}></lightning-button>
+      </lightning-layout>
+    </template>
+
+    <template if:true={effortCompleted}>
+      <lightning-layout horizontal-align="center" class="slds-p-bottom_medium slds-p-top_small">
+        <lightning-button label="Log Another Effort?" variant="brand" onclick={initialize}></lightning-button>
+      </lightning-layout>
+    </template>
+  </lightning-quick-action-panel>
+</template>

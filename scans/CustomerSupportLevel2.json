@@ -1,0 +1,74 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/IdeaProjects/buttons-and-more/force-app/main/default/classes/CustomerSupportLevel2.cls",
+    "violations": [
+      {
+        "line": 3,
+        "column": 24,
+        "endLine": 38,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'executeComplexMethod()' has a cognitive complexity of 89, current threshold is 15\n"
+      },
+      {
+        "line": 3,
+        "column": 24,
+        "endLine": 38,
+        "endColumn": 5,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'executeComplexMethod()' has a cyclomatic complexity of 16.\n"
+      },
+      {
+        "line": 9,
+        "column": 50,
+        "endLine": 9,
+        "endColumn": 122,
+        "severity": 3,
+        "ruleName": "OperationWithLimitsInLoop",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#operationwithlimitsinloop",
+        "message": "\nAvoid operations in loops that may hit governor limits\n"
+      },
+      {
+        "line": 11,
+        "column": 29,
+        "endLine": 11,
+        "endColumn": 30,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 22,
+        "column": 68,
+        "endLine": 22,
+        "endColumn": 72,
+        "severity": 3,
+        "ruleName": "AvoidDebugStatements",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoiddebugstatements",
+        "message": "\nAvoid debug statements since they impact on performance\n"
+      },
+      {
+        "line": 28,
+        "column": 52,
+        "endLine": 28,
+        "endColumn": 56,
+        "severity": 3,
+        "ruleName": "AvoidDebugStatements",
+        "category": "Performance",
+        "url": "https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoiddebugstatements",
+        "message": "\nAvoid debug statements since they impact on performance\n"
+      }
+    ]
+  }
+]

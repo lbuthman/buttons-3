@@ -1,0 +1,25 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    },
+    {
+      "path": "sf-backwoods",
+      "package": "SF Backwoods",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "default": false,
+      "versionDescription": ""
+    }
+  ],
+  "name": "buttons-and-more",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "58.0",
+  "packageAliases": {
+    "SF Backwoods": "0Ho8Z000000TN3GSAW",
+    "SF Backwoods@0.1.0-1": "04t8Z000000lDTEQA2",
+    "SF Backwoods@0.1.0-2": "04t8Z000000lDTOQA2"
+  }
+}
