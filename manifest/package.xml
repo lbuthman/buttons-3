@@ -37,12 +37,7 @@
         <name>Settings</name>
     </types>
     <types>
-        <members>Account</members>
-        <members>Adventurer__c</members>
-        <members>Lead</members>
-        <members>Opportunity</members>
         <members>Task</members>
-        <members>AccountProduct__c</members>
         <members>Product2</members>
         <name>CustomObject</name>
     </types>
@@ -51,7 +46,6 @@
         <name>CustomObjectTranslation</name>
     </types>
     <types>
-        <members>Lead.Treasure_Chest_Compact</members>
         <name>CompactLayout</name>
     </types>
     <types>
@@ -67,9 +61,7 @@
         <name>CustomTab</name>
     </types>
     <types>
-        <members>Investment_Record_Page</members>
         <members>Opportunity_Record_Page</members>
-        <members>Treasure_Chest_Record_Page</members>
         <members>Example_1_Increase_Number</members>
         <members>Example_1_Loop</members>
         <members>Example_2_Count_Clicks</members>
@@ -80,44 +72,18 @@
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>Create_Investment_Idea</members>
-        <members>Investment_Tool</members>
         <name>Flow</name>
     </types>
     <types>
-        <members>Investment_Idea__c.Category__c</members>
-        <members>Investment_Idea__c.Cost__c</members>
-        <members>Investment_Idea__c.Is_Active__c</members>
-        <members>Investment_Idea__c.Story_Points__c</members>
-        <members>Investment_Idea__c.Time_Investment__c</members>
-        <members>Investment_Idea__c.Treasure_Chest__c</members>
-        <members>Account.ShippingFee__c</members>
-        <members>Account.Total_Revenue__c</members>
-        <members>AccountProduct__c.Account__c</members>
-        <members>AccountProduct__c.Product__c</members>
-        <members>AccountProduct__c.Quantity__c</members>
-        <members>Product2.Weight__c</members>
         <name>CustomField</name>
     </types>
     <types>
-        <members>Investment_Idea__c.All</members>
         <name>ListView</name>
     </types>
     <types>
-        <members>Investment_Idea__c.Level_1</members>
-        <members>Investment_Idea__c.Level_2</members>
-        <members>Investment_Idea__c.Level_3</members>
-        <members>Investment_Idea__c.Level_4</members>
-        <members>Investment_Idea__c.Level_5</members>
-        <members>Investment_Idea__c.Level_6</members>
-        <members>Investment_Idea__c.Level_7</members>
-        <members>Investment_Idea__c.Level_8</members>
-        <members>Investment_Idea__c.Level_9</members>
         <name>RecordType</name>
     </types>
     <types>
-        <members>Lead.Add_Investment_Idea</members>
-        <members>Lead.Invest</members>
         <name>QuickAction</name>
     </types>
     <types>
