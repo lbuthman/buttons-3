@@ -26,6 +26,7 @@
       <sourceFolder url="file://$MODULE_DIR$/sf-backwoods" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.sfdx" />
       <excludeFolder url="file://$MODULE_DIR$/.sf" />
+      <excludeFolder url="file://$MODULE_DIR$/ignore" />
     </content>
     <orderEntry type="jdk" jdkName="IlluminatedCloud (buttons-and-more/buttons)" jdkType="IlluminatedCloud" />
     <orderEntry type="sourceFolder" forTests="false" />
