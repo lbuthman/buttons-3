@@ -1,12 +1,16 @@
 @IsTest
 private class AdventureParkTrigger_Test {
     @IsTest
-    static void Test_creatingAPark() {
+    static void should_create_supporting_records_when_Park_is_created() {
+
         Adventure_Park__c park = createPark();
+
+        Test.startTest();
         insert park;
+        Test.stopTest();
 
         Adventure_Park__c parkNow = [SELECT Price_Book__c FROM Adventure_Park__c WHERE Id = :park.Id];
-        Assert.isNotNull(parkNow.Price_Book__c);
+        Assert.isNotNull(parkNow.Price_Book__c, 'Park should have a Price Book value.');
 
         List<Account> accounts = [SELECT Id FROM Account WHERE Adventure_Park__c = :park.Id];
         Assert.areEqual(1, accounts.size());
@@ -19,7 +23,6 @@ private class AdventureParkTrigger_Test {
 
         List<Asset> assets = [SELECT Id FROM Asset WHERE Product2Id IN :products];
         Assert.areEqual(1, assets.size());
-
     }
 
     @IsTest
