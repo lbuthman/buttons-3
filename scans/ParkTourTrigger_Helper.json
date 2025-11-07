@@ -1,0 +1,173 @@
+[
+  {
+    "engine": "pmd-custom",
+    "fileName": "/Users/lbuthman/Developer/Salesforce/buttons-and-more/force-app/main/default/classes/ParkTourTrigger_Helper.cls",
+    "violations": [
+      {
+        "line": 14,
+        "column": 19,
+        "endLine": 64,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "NcssMethodCount",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#ncssmethodcount",
+        "message": "\nThe method 'getPOIrating()' has an NCSS line count of 42 (limit: 40)\n"
+      },
+      {
+        "line": 14,
+        "column": 19,
+        "endLine": 64,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'getPOIrating(List<Park_Tour__c>)' has a cognitive complexity of 40, current threshold is 15\n"
+      },
+      {
+        "line": 14,
+        "column": 19,
+        "endLine": 64,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'getPOIrating(List<Park_Tour__c>)' has a cyclomatic complexity of 20.\n"
+      },
+      {
+        "line": 43,
+        "column": 25,
+        "endLine": 45,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 55,
+        "column": 25,
+        "endLine": 57,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 66,
+        "column": 19,
+        "endLine": 119,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "NcssMethodCount",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#ncssmethodcount",
+        "message": "\nThe method 'updatPOIRating()' has an NCSS line count of 44 (limit: 40)\n"
+      },
+      {
+        "line": 66,
+        "column": 19,
+        "endLine": 119,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'updatPOIRating(List<Park_Tour__c>)' has a cognitive complexity of 40, current threshold is 15\n"
+      },
+      {
+        "line": 66,
+        "column": 19,
+        "endLine": 119,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'updatPOIRating(List<Park_Tour__c>)' has a cyclomatic complexity of 18.\n"
+      },
+      {
+        "line": 97,
+        "column": 25,
+        "endLine": 101,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 109,
+        "column": 25,
+        "endLine": 113,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 121,
+        "column": 19,
+        "endLine": 185,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "NcssMethodCount",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#ncssmethodcount",
+        "message": "\nThe method 'checkNewVisitor()' has an NCSS line count of 57 (limit: 40)\n"
+      },
+      {
+        "line": 121,
+        "column": 19,
+        "endLine": 185,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CognitiveComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cognitivecomplexity",
+        "message": "\nThe method 'checkNewVisitor(List<Park_Tour__c>)' has a cognitive complexity of 85, current threshold is 15\n"
+      },
+      {
+        "line": 121,
+        "column": 19,
+        "endLine": 185,
+        "endColumn": 6,
+        "severity": 3,
+        "ruleName": "CyclomaticComplexity",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#cyclomaticcomplexity",
+        "message": "\nThe method 'checkNewVisitor(List<Park_Tour__c>)' has a cyclomatic complexity of 21.\n"
+      },
+      {
+        "line": 140,
+        "column": 25,
+        "endLine": 151,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      },
+      {
+        "line": 163,
+        "column": 25,
+        "endLine": 180,
+        "endColumn": 26,
+        "severity": 3,
+        "ruleName": "AvoidDeeplyNestedIfStmts",
+        "category": "Design",
+        "url": "https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_apex_design.html#avoiddeeplynestedifstmts",
+        "message": "\nDeeply nested if..then statements are hard to read\n"
+      }
+    ]
+  }
+]
