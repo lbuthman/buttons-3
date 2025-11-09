@@ -10,7 +10,7 @@ trigger AdventureParkTrigger on Adventure_Park__c (before insert, before update,
     }
 
     if (Trigger.isBefore && Trigger.isUpdate) {
-        AdventureParkTrigger_Handler.onBeforeUpdate(Trigger.newMap, Trigger.oldMap);
+        AdventureParkTrigger_Handler.onBeforeUpdate(Trigger.newMap);
     }
 
     if (Trigger.isAfter && Trigger.isUpdate) {
