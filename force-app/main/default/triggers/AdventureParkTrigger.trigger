@@ -2,7 +2,7 @@ trigger AdventureParkTrigger on Adventure_Park__c (before insert, before update,
 
     if (Trigger.isAfter && Trigger.isInsert) {
         AdventureParkTrigger_Handler.onAfterInsert(Trigger.new);
-        ServiceAppointmentHandler.createOpeningAppointments(Trigger.new, Trigger.newMap, null);
+        ServiceAppointmentHandler.createOpeningAppointments(Trigger.new, null);
     }
 
     if (Trigger.isBefore && Trigger.isInsert) {
@@ -15,6 +15,6 @@ trigger AdventureParkTrigger on Adventure_Park__c (before insert, before update,
 
     if (Trigger.isAfter && Trigger.isUpdate) {
         AdventureParkTrigger_Handler.OnAfterUpdate(Trigger.newMap, Trigger.oldMap);
-        ServiceAppointmentHandler.createOpeningAppointments(Trigger.new, Trigger.newMap, Trigger.oldMap);
+        ServiceAppointmentHandler.createOpeningAppointments(Trigger.new, Trigger.oldMap);
     }
 }

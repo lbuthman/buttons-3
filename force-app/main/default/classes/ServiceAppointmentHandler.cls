@@ -1,15 +1,15 @@
 public with sharing class ServiceAppointmentHandler {
 
-    public static void createOpeningAppointments(List<Adventure_Park__c> newList, Map<Id, Adventure_Park__c> newmap, Map<Id, Adventure_Park__c> oldmap) {
+    public static void createOpeningAppointments(List<Adventure_Park__c> newList, Map<Id, Adventure_Park__c> oldmap) {
         List<ServiceAppointment> InsertList = new List<ServiceAppointment>();
         List<ServiceAppointment> UpdateList = new List<ServiceAppointment>();
         Map<Id, ServiceAppointment> mapOfParkIdtoAppointment = new Map<Id, ServiceAppointment>();
         Map<Id, Account> accountByParkId = new Map<Id, Account>();
-        for (Account account: [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :newList]) {
+        for (Account account : [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :newList]) {
             accountByParkId.put(account.Adventure_Park__c, account);
         }
         Map<Id, Asset> assetsByAccount = new Map<Id, Asset>();
-        for (Asset asset: [SELECT AccountId FROM Asset WHERE AccountId IN :accountByParkId.values()]) {
+        for (Asset asset : [SELECT AccountId FROM Asset WHERE AccountId IN :accountByParkId.values()]) {
             assetsByAccount.put(asset.AccountId, asset);
         }
         Set<Id> parkIds = new Set<Id>();
@@ -42,7 +42,11 @@ public with sharing class ServiceAppointmentHandler {
             Adventure_Park__c oldRecord;
             if (oldmap != null && !oldmap.isEmpty()) {
                 oldRecord = oldmap.get(each.Id);
-                if (((!each.Is_Active__c && oldRecord.Is_Active__c)) && mapOfParkIdtoAppointment != null && !mapOfParkIdtoAppointment.isEmpty() && mapOfParkIdtoAppointment.containsKey(each.Id)) {
+                if ((!each.Is_Active__c && oldRecord.Is_Active__c) &&
+                    mapOfParkIdtoAppointment != null &&
+                    !mapOfParkIdtoAppointment.isEmpty() &&
+                    mapOfParkIdtoAppointment.containsKey(each.Id)
+                ) {
                     ServiceAppointment updateRecord = mapOfParkIdtoAppointment.get(each.Id);
                     updateRecord.Status = 'None';
                     UpdateList.add(updateRecord);
@@ -52,8 +56,7 @@ public with sharing class ServiceAppointmentHandler {
                         ServiceAppointment updateRecord = mapOfParkIdtoAppointment.get(each.Id);
                         updateRecord.Status = each.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled';
                         UpdateList.add(updateRecord);
-                    }
-                    else {
+                    } else {
                         Account account = accountByParkId.get(each.Id);
                         ServiceAppointment newRecord = new ServiceAppointment();
                         newRecord.ParentRecordId = assetsByAccount.get(account.Id).Id;
