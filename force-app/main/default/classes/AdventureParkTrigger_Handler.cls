@@ -1,23 +1,5 @@
 public with sharing class AdventureParkTrigger_Handler {
 
-    public static void onBeforeUpdate(Map<Id, Adventure_Park__c> newMap) {
-
-        List<Adventure_Park__c> needPB = new List<Adventure_Park__c>();
-        for (Adventure_Park__c park : newMap.values()) {
-            if (park.Open_Date__c >= Date.today() && park.Is_Active__c == false) {
-                park.Is_Active__c = true;
-            }
-            if (park.Price_Book__c == null) {
-                needPB.add(park);
-            }
-            if (park.Is_Active__c == false && park.Open_Date__c < Date.today()) {
-                park.Inactivated_Date__c = Date.today();
-            }
-        }
-        getPricebooks(needPB);
-
-    }
-
     public static void onBeforeInsert(List<Adventure_Park__c> parks) {
 
         List<Adventure_Park__c> needPB = new List<Adventure_Park__c>();
@@ -107,6 +89,24 @@ public with sharing class AdventureParkTrigger_Handler {
         if (!assets.isEmpty()) {
             insert assets;
         }
+    }
+
+    public static void onBeforeUpdate(Map<Id, Adventure_Park__c> newMap) {
+
+        List<Adventure_Park__c> needPB = new List<Adventure_Park__c>();
+        for (Adventure_Park__c park : newMap.values()) {
+            if (park.Open_Date__c >= Date.today() && park.Is_Active__c == false) {
+                park.Is_Active__c = true;
+            }
+            if (park.Price_Book__c == null) {
+                needPB.add(park);
+            }
+            if (park.Is_Active__c == false && park.Open_Date__c < Date.today()) {
+                park.Inactivated_Date__c = Date.today();
+            }
+        }
+        getPricebooks(needPB);
+
     }
 
     public static void OnAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {
