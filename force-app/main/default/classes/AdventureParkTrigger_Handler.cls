@@ -109,7 +109,7 @@ public with sharing class AdventureParkTrigger_Handler {
 
     }
 
-    public static void OnAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {
+    public static void onAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {
         Set<Id> parksIds = new Set<Id>();
         for (Id parkId : newMap.keySet()) {
             if (newMap.get(parkId).Open_Date__c < Date.today() &&
