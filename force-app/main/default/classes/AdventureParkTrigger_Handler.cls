@@ -10,7 +10,7 @@ public with sharing class AdventureParkTrigger_Handler {
         }
 
         if (!parksThatNeedPriceBooks.isEmpty()) {
-            AdventureParkTrigger_Helper.getPriceBooks(parksThatNeedPriceBooks);
+            AdventureParkTrigger_Helper.setPriceBooks(parksThatNeedPriceBooks);
         }
     }
 
@@ -99,7 +99,7 @@ public with sharing class AdventureParkTrigger_Handler {
             }
         }
 
-        AdventureParkTrigger_Helper.getPriceBooks(needPB);
+        AdventureParkTrigger_Helper.setPriceBooks(needPB);
     }
 
     public static void onAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {
