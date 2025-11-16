@@ -10,16 +10,7 @@ public with sharing class AdventureParkTrigger_Handler {
         }
 
         if (!parksThatNeedPriceBooks.isEmpty()) {
-            getPriceBooks(parksThatNeedPriceBooks);
-        }
-    }
-
-    private static void getPriceBooks(List<Adventure_Park__c> needPB) {
-        Map<Id, Pricebook2> pbMap = AdventureParkTrigger_Helper.createPB(needPB);
-        for (Adventure_Park__c p : needPB) {
-            if (pbMap.get(p.Id) != null) {
-                p.Price_Book__c = pbMap.get(p.Id).Id;
-            }
+            AdventureParkTrigger_Helper.getPriceBooks(parksThatNeedPriceBooks);
         }
     }
 
@@ -107,8 +98,8 @@ public with sharing class AdventureParkTrigger_Handler {
                 park.Inactivated_Date__c = Date.today();
             }
         }
-        getPriceBooks(needPB);
 
+        AdventureParkTrigger_Helper.getPriceBooks(needPB);
     }
 
     public static void onAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {

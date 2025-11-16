@@ -1,6 +1,15 @@
 public with sharing class AdventureParkTrigger_Helper {
 
-    public static Map<Id, Pricebook2> createPB(List<Adventure_Park__c> parks) {
+    public static void getPriceBooks(List<Adventure_Park__c> needPB) {
+        Map<Id, Pricebook2> pbMap = createPB(needPB);
+        for (Adventure_Park__c p : needPB) {
+            if (pbMap.get(p.Id) != null) {
+                p.Price_Book__c = pbMap.get(p.Id).Id;
+            }
+        }
+    }
+
+    private static Map<Id, Pricebook2> createPB(List<Adventure_Park__c> parks) {
 
         Map<Id, Pricebook2> pbMap = new Map<Id, Pricebook2>();
         List<Pricebook2> pbList = new List<Pricebook2>();
