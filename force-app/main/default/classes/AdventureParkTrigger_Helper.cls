@@ -24,8 +24,15 @@ public with sharing class AdventureParkTrigger_Helper {
     }
 
     public static void createRelatedData(List<Adventure_Park__c> parks) {
+        Map<Id, Account> accountByParkId = createAccounts(parks);
+        Map<Id, Product2> productByParkId = createProducts(parks);
+
+        createPBEs(parks, productByParkId);
+        createAssets(parks, productByParkId, accountByParkId);
+    }
+
+    private static Map<Id, Account> createAccounts(List<Adventure_Park__c> parks) {
         Map<Id, Account> accountByParkId = new Map<Id, Account>();
-        Map<Id, Product2> productByParkId = new Map<Id, Product2>();
         for (Adventure_Park__c newPark : parks) {
             Account account = new Account(
                 Name = newPark.Name + ' Account',
@@ -33,7 +40,17 @@ public with sharing class AdventureParkTrigger_Helper {
                 AccountSource = 'Automation'
             );
             accountByParkId.put(newPark.Id, account);
+        }
 
+        if (!accountByParkId.isEmpty()) {
+            insert accountByParkId.values();
+        }
+        return accountByParkId;
+    }
+
+    private static Map<Id, Product2> createProducts(List<Adventure_Park__c> parks) {
+        Map<Id, Product2> productByParkId = new Map<Id, Product2>();
+        for (Adventure_Park__c newPark : parks) {
             Product2 product = new Product2(
                 Name = newPark.Name + ' Product',
                 Adventure_Park__c = newPark.Id,
@@ -42,17 +59,15 @@ public with sharing class AdventureParkTrigger_Helper {
             productByParkId.put(newPark.Id, product);
         }
 
-        if (!accountByParkId.isEmpty()) {
-            insert accountByParkId.values();
-        }
-
         if (!productByParkId.isEmpty()) {
             insert productByParkId.values();
         }
+        return productByParkId;
+    }
 
+    private static void createPBEs(List<Adventure_Park__c> parks, Map<Id, Product2> productByParkId) {
         Pricebook2 standardPriceBook = [SELECT Id, IsActive FROM Pricebook2 WHERE IsStandard = TRUE LIMIT 1];
         List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
-        List<Asset> assets = new List<Asset>();
         for (Adventure_Park__c newPark : parks) {
             PricebookEntry standardPBE = new PricebookEntry(
                 Pricebook2Id = standardPriceBook.Id,
@@ -69,6 +84,16 @@ public with sharing class AdventureParkTrigger_Helper {
                 IsActive = true
             );
             pricebookEntries.add(customPBE);
+        }
+
+        if (!pricebookEntries.isEmpty()) {
+            insert pricebookEntries;
+        }
+    }
+
+    private static void createAssets(List<Adventure_Park__c> parks, Map<Id, Product2> productByParkId, Map<Id, Account> accountByParkId) {
+        List<Asset> assets = new List<Asset>();
+        for (Adventure_Park__c newPark : parks) {
 
             Asset asset = new Asset(
                 Name = newPark.Name + ' Asset',
@@ -78,12 +103,8 @@ public with sharing class AdventureParkTrigger_Helper {
             assets.add(asset);
         }
 
-        if (!pricebookEntries.isEmpty()) {
-            insert pricebookEntries;
-        }
-
         if (!assets.isEmpty()) {
             insert assets;
         }
     }
- }
+}
