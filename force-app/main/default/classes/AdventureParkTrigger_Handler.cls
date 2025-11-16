@@ -15,68 +15,8 @@ public with sharing class AdventureParkTrigger_Handler {
     }
 
     public static void onAfterInsert(List<Adventure_Park__c> newParks) {
-        Map<Id, Account> accountByParkId = new Map<Id, Account>();
-        Map<Id, Product2> productByParkId = new Map<Id, Product2>();
-        for (Adventure_Park__c newPark : newParks) {
-            Account account = new Account(
-                Name = newPark.Name + ' Account',
-                Adventure_Park__c = newPark.Id,
-                AccountSource = 'Automation'
-            );
-            accountByParkId.put(newPark.Id, account);
-
-            Product2 product = new Product2(
-                Name = newPark.Name + ' Product',
-                Adventure_Park__c = newPark.Id,
-                IsActive = true
-            );
-            productByParkId.put(newPark.Id, product);
-        }
-
-        if (!accountByParkId.isEmpty()) {
-            insert accountByParkId.values();
-        }
-
-        if (!productByParkId.isEmpty()) {
-            insert productByParkId.values();
-        }
-
-        Pricebook2 standardPriceBook = [SELECT Id, IsActive FROM Pricebook2 WHERE IsStandard = TRUE LIMIT 1];
-        List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
-        List<Asset> assets = new List<Asset>();
-        for (Adventure_Park__c park : newParks) {
-            // Create a Pricebook Entry in the Standard Price Book
-            PricebookEntry standardPBE = new PricebookEntry(
-                Pricebook2Id = standardPriceBook.Id,
-                Product2Id = productByParkId.get(park.Id).Id,
-                UnitPrice = park.Admission_Price__c,
-                IsActive = true
-            );
-            pricebookEntries.add(standardPBE);
-
-            // Create a Pricebook Entry in the Custom Price Book
-            PricebookEntry customPBE = new PricebookEntry(
-                Pricebook2Id = park.Price_Book__c,
-                Product2Id = productByParkId.get(park.Id).Id,
-                UnitPrice = park.Admission_Price__c,
-                IsActive = true
-            );
-            pricebookEntries.add(customPBE);
-
-            Asset asset = new Asset(
-                Name = park.Name + ' Asset',
-                Product2Id = productByParkId.get(park.Id).Id,
-                AccountId = accountByParkId.get(park.Id).Id
-            );
-            assets.add(asset);
-        }
-
-        if (!pricebookEntries.isEmpty()) {
-            insert pricebookEntries;
-        }
-
-        if (!assets.isEmpty()) {
-            insert assets;
+        if (!newParks.isEmpty()) {
+            AdventureParkTrigger_Helper.createRelatedData(newParks);
         }
     }
 
