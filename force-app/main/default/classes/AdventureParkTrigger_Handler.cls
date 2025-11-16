@@ -2,17 +2,19 @@ public with sharing class AdventureParkTrigger_Handler {
 
     public static void onBeforeInsert(List<Adventure_Park__c> parks) {
 
-        List<Adventure_Park__c> needPB = new List<Adventure_Park__c>();
-        for (Adventure_Park__c p : parks) {
-            if (p.Price_Book__c == null) {
-                needPB.add(p);
+        List<Adventure_Park__c> parksThatNeedPriceBooks = new List<Adventure_Park__c>();
+        for (Adventure_Park__c newPark: parks) {
+            if (newPark.Price_Book__c == null) {
+                parksThatNeedPriceBooks.add(newPark);
             }
         }
-        getPricebooks(needPB);
 
+        if (!parksThatNeedPriceBooks.isEmpty()) {
+            getPriceBooks(parksThatNeedPriceBooks);
+        }
     }
 
-    private static void getPricebooks(List<Adventure_Park__c> needPB) {
+    private static void getPriceBooks(List<Adventure_Park__c> needPB) {
         Map<Id, Pricebook2> pbMap = AdventureParkTrigger_Helper.createPB(needPB);
         for (Adventure_Park__c p : needPB) {
             if (pbMap.get(p.Id) != null) {
@@ -105,7 +107,7 @@ public with sharing class AdventureParkTrigger_Handler {
                 park.Inactivated_Date__c = Date.today();
             }
         }
-        getPricebooks(needPB);
+        getPriceBooks(needPB);
 
     }
 
