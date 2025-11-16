@@ -15,44 +15,40 @@ public with sharing class AdventureParkTrigger_Handler {
     }
 
     public static void onAfterInsert(List<Adventure_Park__c> newParks) {
-        Pricebook2 standardPriceBook = [SELECT Id, IsActive FROM Pricebook2 WHERE IsStandard = TRUE LIMIT 1];
-        List<Account> accounts = new List<Account>();
         Map<Id, Account> accountByParkId = new Map<Id, Account>();
-        List<Product2> products = new List<Product2>();
-        List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
-        List<Asset> assets = new List<Asset>();
-        Map<Id, Product2> productbyParkId = new Map<Id, Product2>();
-        for (Adventure_Park__c park : newParks) {
+        Map<Id, Product2> productByParkId = new Map<Id, Product2>();
+        for (Adventure_Park__c newPark : newParks) {
             Account account = new Account(
-                Name = park.Name + ' Account',
-                Adventure_Park__c = park.Id,
+                Name = newPark.Name + ' Account',
+                Adventure_Park__c = newPark.Id,
                 AccountSource = 'Automation'
             );
-            accounts.add(account);
-            accountByParkId.put(park.Id, account);
+            accountByParkId.put(newPark.Id, account);
 
             Product2 product = new Product2(
-                Name = park.Name + ' Product',
-                Adventure_Park__c = park.Id,
+                Name = newPark.Name + ' Product',
+                Adventure_Park__c = newPark.Id,
                 IsActive = true
             );
-            products.add(product);
-            productbyParkId.put(park.Id, product);
+            productByParkId.put(newPark.Id, product);
         }
 
-        if (!accounts.isEmpty()) {
-            insert accounts;
+        if (!accountByParkId.isEmpty()) {
+            insert accountByParkId.values();
         }
 
-        if (!products.isEmpty()) {
-            insert products;
+        if (!productByParkId.isEmpty()) {
+            insert productByParkId.values();
         }
 
+        Pricebook2 standardPriceBook = [SELECT Id, IsActive FROM Pricebook2 WHERE IsStandard = TRUE LIMIT 1];
+        List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
+        List<Asset> assets = new List<Asset>();
         for (Adventure_Park__c park : newParks) {
             // Create a Pricebook Entry in the Standard Price Book
             PricebookEntry standardPBE = new PricebookEntry(
                 Pricebook2Id = standardPriceBook.Id,
-                Product2Id = productbyParkId.get(park.Id).Id,
+                Product2Id = productByParkId.get(park.Id).Id,
                 UnitPrice = park.Admission_Price__c,
                 IsActive = true
             );
@@ -61,7 +57,7 @@ public with sharing class AdventureParkTrigger_Handler {
             // Create a Pricebook Entry in the Custom Price Book
             PricebookEntry customPBE = new PricebookEntry(
                 Pricebook2Id = park.Price_Book__c,
-                Product2Id = productbyParkId.get(park.Id).Id,
+                Product2Id = productByParkId.get(park.Id).Id,
                 UnitPrice = park.Admission_Price__c,
                 IsActive = true
             );
@@ -69,7 +65,7 @@ public with sharing class AdventureParkTrigger_Handler {
 
             Asset asset = new Asset(
                 Name = park.Name + ' Asset',
-                Product2Id = productbyParkId.get(park.Id).Id,
+                Product2Id = productByParkId.get(park.Id).Id,
                 AccountId = accountByParkId.get(park.Id).Id
             );
             assets.add(asset);
