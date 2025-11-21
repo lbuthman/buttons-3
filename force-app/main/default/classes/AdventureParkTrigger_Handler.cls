@@ -20,25 +20,22 @@ public with sharing class AdventureParkTrigger_Handler {
         }
     }
 
-    public static void onBeforeUpdate(Map<Id, Adventure_Park__c> newMap) {
+    public static void onBeforeUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldParks) {
 
-        List<Adventure_Park__c> parksThatNeedPriceBooks = new List<Adventure_Park__c>();
-        for (Adventure_Park__c park : newMap.values()) {
-            if (park.Open_Date__c >= Date.today() && park.Is_Active__c == false) {
-                park.Is_Active__c = true;
+        for (Adventure_Park__c newPark : newMap.values()) {
+            Adventure_Park__c oldPark = oldParks.get(newPark.Id);
+
+            if (newPark.Price_Book__c == null && oldPark.Price_Book__c != null) {
+                newPark.Price_Book__c = oldPark.Price_Book__c;
             }
 
-            if (park.Price_Book__c == null) {
-                parksThatNeedPriceBooks.add(park);
+            if (newPark.Open_Date__c >= Date.today() && newPark.Is_Active__c == false) {
+                newPark.Is_Active__c = true;
             }
 
-            if (park.Is_Active__c == false && park.Open_Date__c < Date.today()) {
-                park.Inactivated_Date__c = Date.today();
+            if (newPark.Is_Active__c == false && newPark.Open_Date__c < Date.today()) {
+                newPark.Inactivated_Date__c = Date.today();
             }
-        }
-
-        if (!parksThatNeedPriceBooks.isEmpty()) {
-            AdventureParkTrigger_Helper.setPriceBooks(parksThatNeedPriceBooks);
         }
     }
 
