@@ -42,7 +42,7 @@ public with sharing class AdventureParkTrigger_Handler {
     }
 
     public static void onAfterUpdate(Map<Id, Adventure_Park__c> newParksById, Map<Id, Adventure_Park__c> oldParksById) {
-        Set<Id> deactivatedParkIds = new Set<Id>();
+        Map<Id, Date> deactivatedDatesByParkId = new Map<Id, Date>();
         for (Id parkId : newParksById.keySet()) {
             Adventure_Park__c newPark = newParksById.get(parkId);
             Adventure_Park__c oldPark = oldParksById.get(parkId);
@@ -51,22 +51,12 @@ public with sharing class AdventureParkTrigger_Handler {
                 !newPark.Is_Active__c &&
                 newPark.Inactivated_Date__c != null
             ) {
-                deactivatedParkIds.add(parkId);
+                deactivatedDatesByParkId.put(parkId, newPark.Inactivated_Date__c);
             }
         }
 
-        if (deactivatedParkIds != null && !deactivatedParkIds.isEmpty()) {
-            List<Park_Of_Interest__c> parkOfInterests = new List<Park_Of_Interest__c>();
-            for (Park_Of_Interest__c parkOfInterest : [
-                SELECT Inactive__c, Adventure_Park__c
-                FROM Park_Of_Interest__c
-                WHERE Adventure_Park__c IN :oldParksById.keySet()
-            ]) {
-                parkOfInterest.Inactive__c = true;
-                parkOfInterest.Inactivated_Date__c = newParksById.get(parkOfInterest.Adventure_Park__c).Inactivated_Date__c;
-                parkOfInterests.add(parkOfInterest);
-            }
-            update parkOfInterests;
+        if (!deactivatedDatesByParkId.isEmpty()) {
+            AdventureParkTrigger_Helper.deactivateRelatedPOI(deactivatedDatesByParkId);
         }
     }
 }

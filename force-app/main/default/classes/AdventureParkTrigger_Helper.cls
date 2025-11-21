@@ -107,4 +107,19 @@ public with sharing class AdventureParkTrigger_Helper {
             insert assets;
         }
     }
+
+    public static void deactivateRelatedPOI(Map<Id, Date> deactivatedDatesByParkId) {
+        List<Park_Of_Interest__c> poiListToUpdate = new List<Park_Of_Interest__c>();
+        for (Park_Of_Interest__c poi : [
+            SELECT Inactive__c, Adventure_Park__c
+            FROM Park_Of_Interest__c
+            WHERE Adventure_Park__c IN :deactivatedDatesByParkId.keySet()
+            AND Inactive__c = FALSE
+        ]) {
+            poi.Inactive__c = true;
+            poi.Inactivated_Date__c = deactivatedDatesByParkId.get(poi.Adventure_Park__c);
+            poiListToUpdate.add(poi);
+        }
+        update poiListToUpdate;
+    }
 }
