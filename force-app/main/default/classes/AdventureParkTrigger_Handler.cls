@@ -29,13 +29,15 @@ public with sharing class AdventureParkTrigger_Handler {
                 newPark.Price_Book__c = oldPark.Price_Book__c;
             }
 
-            if (newPark.Open_Date__c >= Date.today() && newPark.Is_Active__c == false) {
-                newPark.Is_Active__c = true;
-            }
+            //todo: move this logic into a Scheduled Batch job
+//            if (newPark.Open_Date__c >= Date.today() && newPark.Is_Active__c == false) {
+//                newPark.Is_Active__c = true;
+//            }
 
-            if (newPark.Is_Active__c == false && newPark.Open_Date__c < Date.today()) {
-                newPark.Inactivated_Date__c = Date.today();
-            }
+            //todo: move this logic into a Scheduled Batch job
+//            if (newPark.Is_Active__c == false && newPark.Open_Date__c < Date.today()) {
+//                newPark.Inactivated_Date__c = Date.today();
+//            }
         }
     }
 
