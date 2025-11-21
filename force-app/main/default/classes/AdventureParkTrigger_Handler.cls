@@ -41,27 +41,29 @@ public with sharing class AdventureParkTrigger_Handler {
         }
     }
 
-    public static void onAfterUpdate(Map<Id, Adventure_Park__c> newMap, Map<Id, Adventure_Park__c> oldMap) {
-        Set<Id> parksIds = new Set<Id>();
-        for (Id parkId : newMap.keySet()) {
-            if (newMap.get(parkId).Open_Date__c < Date.today() &&
-                newMap.get(parkId).Is_Active__c != oldMap.get(parkId).Is_Active__c &&
-                !newMap.get(parkId).Is_Active__c &&
-                newMap.get(parkId).Inactivated_Date__c != null
+    public static void onAfterUpdate(Map<Id, Adventure_Park__c> newParksById, Map<Id, Adventure_Park__c> oldParksById) {
+        Set<Id> deactivatedParkIds = new Set<Id>();
+        for (Id parkId : newParksById.keySet()) {
+            Adventure_Park__c newPark = newParksById.get(parkId);
+            Adventure_Park__c oldPark = oldParksById.get(parkId);
+            if (newPark.Open_Date__c < Date.today() &&
+                newPark.Is_Active__c != oldPark.Is_Active__c &&
+                !newPark.Is_Active__c &&
+                newPark.Inactivated_Date__c != null
             ) {
-                parksIds.add(parkId);
+                deactivatedParkIds.add(parkId);
             }
         }
 
-        if (parksIds != null && !parksIds.isEmpty()) {
+        if (deactivatedParkIds != null && !deactivatedParkIds.isEmpty()) {
             List<Park_Of_Interest__c> parkOfInterests = new List<Park_Of_Interest__c>();
             for (Park_Of_Interest__c parkOfInterest : [
                 SELECT Inactive__c, Adventure_Park__c
                 FROM Park_Of_Interest__c
-                WHERE Adventure_Park__c IN :oldMap.keySet()
+                WHERE Adventure_Park__c IN :oldParksById.keySet()
             ]) {
                 parkOfInterest.Inactive__c = true;
-                parkOfInterest.Inactivated_Date__c = newMap.get(parkOfInterest.Adventure_Park__c).Inactivated_Date__c;
+                parkOfInterest.Inactivated_Date__c = newParksById.get(parkOfInterest.Adventure_Park__c).Inactivated_Date__c;
                 parkOfInterests.add(parkOfInterest);
             }
             update parkOfInterests;
