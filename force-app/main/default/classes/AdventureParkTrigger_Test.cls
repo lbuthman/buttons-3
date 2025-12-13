@@ -43,8 +43,10 @@ private class AdventureParkTrigger_Test {
     }
 
     @IsTest
-    static void Test_updatingAPark() {
+    static void should_deactivate_related_POI_when_Park_is_deactivated() {
         Adventure_Park__c park = createPark();
+        park.Is_Active__c = true;
+        park.Open_Date__c = Date.today().addDays(-5);
         insert park;
 
         Lead lead = new Lead(FirstName='Test', LastName='Lead', Company = 'Acme');
@@ -57,23 +59,16 @@ private class AdventureParkTrigger_Test {
         );
         insert poi;
 
-        //todo: move this test logic into the new Scheduled Batch unit test
-//        park.Open_Date__c = Date.today();
-//        update park;
-//
-//        Adventure_Park__c nowPark = [SELECT Is_Active__c FROM Adventure_Park__c WHERE Id = :park.Id];
-//        Assert.isTrue(nowPark.Is_Active__c, 'Opened park should be active.');
-//
-//        park.Is_Active__c = false;
-//        park.Open_Date__c = Date.today().addDays(-1);
-//        update park;
-//
-//        nowPark = [SELECT Inactivated_Date__c FROM Adventure_Park__c WHERE Id = :park.Id];
-//        Assert.areEqual(Date.today(), nowPark.Inactivated_Date__c);
-//
-//        Park_Of_Interest__c nowPOI = [SELECT Inactive__c, Inactivated_Date__c FROM Park_Of_Interest__c WHERE Id = :poi.Id];
-//        Assert.isTrue(nowPOI.Inactive__c);
-//        Assert.areEqual(nowPark.Inactivated_Date__c, nowPOI.Inactivated_Date__c);
+        Test.startTest();
+        park.Open_Date__c = Date.today().addDays(-1);
+        park.Is_Active__c = false;
+        park.Inactivated_Date__c = Date.today();
+        update park;
+        Test.stopTest();
+
+        Park_Of_Interest__c nowPOI = [SELECT Inactive__c, Inactivated_Date__c FROM Park_Of_Interest__c WHERE Id = :poi.Id];
+        Assert.isTrue(nowPOI.Inactive__c);
+        Assert.areEqual(park.Inactivated_Date__c, nowPOI.Inactivated_Date__c);
     }
 
     private static Adventure_Park__c createPark() {
