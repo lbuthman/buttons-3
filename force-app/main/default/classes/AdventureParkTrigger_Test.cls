@@ -26,6 +26,23 @@ private class AdventureParkTrigger_Test {
     }
 
     @IsTest
+    static void should_prevent_deletion_of_Price_Book_on_Park() {
+        Adventure_Park__c park = createPark();
+        insert park;
+
+        park = [SELECT Price_Book__c FROM Adventure_Park__c WHERE Id = :park.Id];
+        Assert.isNotNull(park.Price_Book__c);
+
+        Test.startTest();
+        park.Price_Book__c = null;
+        update park;
+        Test.stopTest();
+
+        park = [SELECT Price_Book__c FROM Adventure_Park__c WHERE Id = :park.Id];
+        Assert.isNotNull(park.Price_Book__c);
+    }
+
+    @IsTest
     static void Test_updatingAPark() {
         Adventure_Park__c park = createPark();
         insert park;
