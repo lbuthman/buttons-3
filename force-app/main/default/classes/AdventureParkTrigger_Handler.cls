@@ -25,6 +25,7 @@ public with sharing class AdventureParkTrigger_Handler {
         for (Adventure_Park__c newPark : newMap.values()) {
             Adventure_Park__c oldPark = oldParks.get(newPark.Id);
 
+            //@test: should_prevent_deletion_of_Price_Book_on_Park
             if (newPark.Price_Book__c == null && oldPark.Price_Book__c != null) {
                 newPark.Price_Book__c = oldPark.Price_Book__c;
             }

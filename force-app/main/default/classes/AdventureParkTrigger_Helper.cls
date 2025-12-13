@@ -1,5 +1,6 @@
 public with sharing class AdventureParkTrigger_Helper {
 
+    //@test: should_create_supporting_records_when_Park_is_created
     public static void setPriceBooks(List<Adventure_Park__c> parks) {
         Map<Id, Pricebook2> priceBookByParkId = createPriceBooksFromParks(parks);
         for (Adventure_Park__c park : parks) {
@@ -23,6 +24,7 @@ public with sharing class AdventureParkTrigger_Helper {
         return priceBookByParkId;
     }
 
+    //@test: should_create_supporting_records_when_Park_is_created
     public static void createRelatedData(List<Adventure_Park__c> parks) {
         Map<Id, Account> accountByParkId = createAccounts(parks);
         Map<Id, Product2> productByParkId = createProducts(parks);
