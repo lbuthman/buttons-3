@@ -110,6 +110,7 @@ public with sharing class AdventureParkTrigger_Helper {
         }
     }
 
+    //@test: should_deactivate_related_POI_when_Park_is_deactivated
     public static void deactivateRelatedPOI(Map<Id, Date> deactivatedDatesByParkId) {
         List<Park_Of_Interest__c> poiListToUpdate = new List<Park_Of_Interest__c>();
         for (Park_Of_Interest__c poi : [
