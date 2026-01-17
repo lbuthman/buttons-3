@@ -6,7 +6,6 @@ trigger AdventureParkTrigger on Adventure_Park__c (before insert, before update,
     
     if (Trigger.isAfter && Trigger.isInsert) {
         AdventureParkTrigger_Handler.onAfterInsert(Trigger.new);
-        ServiceAppointmentHandler.createOpeningAppointments(Trigger.new, null);
     }
 
     if (Trigger.isBefore && Trigger.isUpdate) {
