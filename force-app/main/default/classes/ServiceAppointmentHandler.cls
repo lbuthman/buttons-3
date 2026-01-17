@@ -13,12 +13,13 @@ public with sharing class ServiceAppointmentHandler {
         List<ServiceAppointment> appointsToInsert = new List<ServiceAppointment>();
         Set<Id> parkIds = new Set<Id>();
         for (Adventure_Park__c newPark : newParks) {
-            Adventure_Park__c oldPark = oldParksById.get(newPark.Id);
-
             if (newPark.Is_Active__c && Trigger.isInsert) {
                 Account account = accountByParkId.get(newPark.Id);
                 appointsToInsert.add(createServiceAppointment(assetsByAccountId, account, newPark));
             }
+
+            if (oldParksById == null) { continue; }
+            Adventure_Park__c oldPark = oldParksById.get(newPark.Id);
 
             if (oldPark != null && (newPark.Is_Active__c != oldPark.Is_Active__c)) {
                 parkIds.add(newPark.Id);
@@ -36,9 +37,10 @@ public with sharing class ServiceAppointmentHandler {
 
         List<ServiceAppointment> appointsToUpdate = new List<ServiceAppointment>();
         for (Adventure_Park__c newPark : newParks) {
-            Adventure_Park__c oldRecord = oldParksById.get(newPark.Id);
+            if (oldParksById == null) { continue; }
+            Adventure_Park__c oldPark = oldParksById.get(newPark.Id);
 
-            if ((!newPark.Is_Active__c && oldRecord.Is_Active__c) &&
+            if ((!newPark.Is_Active__c && oldPark.Is_Active__c) &&
                 existingAppointByParkId != null &&
                 !existingAppointByParkId.isEmpty() &&
                 existingAppointByParkId.containsKey(newPark.Id)
@@ -48,7 +50,7 @@ public with sharing class ServiceAppointmentHandler {
                 appointsToUpdate.add(updateRecord);
             }
 
-            if ((newPark.Is_Active__c && !oldRecord.Is_Active__c)) {
+            if ((newPark.Is_Active__c && !oldPark.Is_Active__c)) {
                 //todo: this code should never execute, unless there is other automation that creates Appointments
                 if (existingAppointByParkId.containsKey(newPark.Id)) {
                     ServiceAppointment updateRecord = existingAppointByParkId.get(newPark.Id);
