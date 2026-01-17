@@ -102,6 +102,26 @@ private class AdventureParkTrigger_Test {
         Assert.areEqual('Scheduled', serviceAppointments[0].Status);
     }
 
+    @IsTest
+    static void should_set_Service_Appointment_Status_to_None_when_deactivated() {
+        Adventure_Park__c park = createPark();
+        park.Open_Date__c = Date.today().addDays(-1);
+        park.Is_Active__c = true;
+        insert park;
+
+        List<ServiceAppointment> serviceAppointments = [SELECT Id, Status FROM ServiceAppointment];
+        Assert.areEqual(1, serviceAppointments.size(), 'Sanity check.');
+
+        Test.startTest();
+        park.Is_Active__c = false;
+        update park;
+        Test.stopTest();
+
+        serviceAppointments = [SELECT Id, Status FROM ServiceAppointment];
+        Assert.areEqual(1, serviceAppointments.size());
+        Assert.areEqual('None', serviceAppointments[0].Status);
+    }
+
     private static Adventure_Park__c createPark() {
         return new Adventure_Park__c(
             Name = 'Test Park',

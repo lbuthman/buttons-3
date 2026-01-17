@@ -127,6 +127,7 @@ public with sharing class AdventureParkTrigger_Helper {
     }
 
     //@test: should_create_Service_Appointment_when_new_Park_is_Active_and_has_an_Open_Date
+    //@test: should_create_Service_Appointment_when_existing_Park_with_an_Open_Date_becomes_Active
     public static void createServiceAppointments(List<Adventure_Park__c> activatedParks) {
         Map<Id, Account> accountByParkId = new Map<Id, Account>();
         for (Account account : [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :activatedParks]) {
@@ -155,7 +156,7 @@ public with sharing class AdventureParkTrigger_Helper {
         insert serviceAppointments;
     }
 
-    //@test: should_create_Service_Appointment_when_existing_Park_with_an_Open_Date_becomes_Active
+    //@test: should_set_Service_Appointment_Status_to_None_when_deactivated
     public static void deactivateRelatedServiceAppointments(List<Adventure_Park__c> parks) {
         List<ServiceAppointment> appointmentsToUpdate = new List<ServiceAppointment>();
         for (ServiceAppointment appointment : [
