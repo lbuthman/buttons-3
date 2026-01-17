@@ -15,8 +15,19 @@ public with sharing class AdventureParkTrigger_Handler {
     }
 
     public static void onAfterInsert(List<Adventure_Park__c> newParks) {
+        List<Adventure_Park__c> activatedParks = new List<Adventure_Park__c>();
+        for (Adventure_Park__c newPark : newParks) {
+            if (newPark.Is_Active__c && newPark.Open_Date__c != null) {
+                activatedParks.add(newPark);
+            }
+        }
+
         if (!newParks.isEmpty()) {
             AdventureParkTrigger_Helper.createRelatedData(newParks);
+        }
+
+        if (!activatedParks.isEmpty()) {
+            AdventureParkTrigger_Helper.createServiceAppointments(activatedParks);
         }
     }
 

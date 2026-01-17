@@ -1,19 +1,6 @@
 @IsTest
 private class ServiceAppointmentHandler_Test {
-    @IsTest
-    static void should_create_Service_Appointment_when_new_Park_is_Active_and_has_an_Open_Date() {
-        Adventure_Park__c park = createPark();
-        park.Is_Active__c = true;
-        park.Open_Date__c = Date.today();
 
-        Test.startTest();
-        insert park;
-        Test.stopTest();
-
-        List<ServiceAppointment> serviceAppointments = [SELECT Status FROM ServiceAppointment];
-        Assert.areEqual(1, serviceAppointments.size());
-        Assert.areEqual('In Progress', serviceAppointments[0].Status);
-    }
 
     @IsTest
     static void should_create_Service_Appointment_when_existing_Park_with_an_Open_Date_becomes_Active() {

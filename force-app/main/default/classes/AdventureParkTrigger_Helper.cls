@@ -125,4 +125,33 @@ public with sharing class AdventureParkTrigger_Helper {
         }
         update poiListToUpdate;
     }
+
+    //@test: should_create_Service_Appointment_when_new_Park_is_Active_and_has_an_Open_Date
+    public static void createServiceAppointments(List<Adventure_Park__c> activatedParks) {
+        Map<Id, Account> accountByParkId = new Map<Id, Account>();
+        for (Account account : [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :activatedParks]) {
+            accountByParkId.put(account.Adventure_Park__c, account);
+        }
+        Map<Id, Asset> assetsByAccountId = new Map<Id, Asset>();
+        for (Asset asset : [SELECT AccountId FROM Asset WHERE AccountId IN :accountByParkId.values()]) {
+            assetsByAccountId.put(asset.AccountId, asset);
+        }
+
+        List<ServiceAppointment> serviceAppointments = new List<ServiceAppointment>();
+        for (Adventure_Park__c park : activatedParks) {
+            Account account = accountByParkId.get(park.Id);
+            Asset asset = assetsByAccountId.get(account.Id);
+
+            serviceAppointments.add(
+                new ServiceAppointment(
+                    ParentRecordId = asset.Id,
+                    Status = park.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled',
+                    EarliestStartTime = Datetime.newInstance(park.Open_Date__c, Time.newInstance(9, 0, 0, 0)),
+                    DueDate = Datetime.newInstance(park.Open_Date__c, Time.newInstance(9, 0, 0, 0)).addDays(7),
+                    Subject = 'Opening Day Party Kickoff!'
+                )
+            );
+        }
+        insert serviceAppointments;
+    }
 }
