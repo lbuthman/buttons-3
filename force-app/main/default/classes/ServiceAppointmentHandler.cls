@@ -1,79 +1,81 @@
 public with sharing class ServiceAppointmentHandler {
 
-    public static void createOpeningAppointments(List<Adventure_Park__c> newList, Map<Id, Adventure_Park__c> oldmap) {
-        List<ServiceAppointment> InsertList = new List<ServiceAppointment>();
-        List<ServiceAppointment> UpdateList = new List<ServiceAppointment>();
-        Map<Id, ServiceAppointment> mapOfParkIdtoAppointment = new Map<Id, ServiceAppointment>();
+    public static void createOpeningAppointments(List<Adventure_Park__c> newParks, Map<Id, Adventure_Park__c> oldParksById) {
         Map<Id, Account> accountByParkId = new Map<Id, Account>();
-        for (Account account : [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :newList]) {
+        for (Account account : [SELECT Adventure_Park__c FROM Account WHERE Adventure_Park__c IN :newParks]) {
             accountByParkId.put(account.Adventure_Park__c, account);
         }
-        Map<Id, Asset> assetsByAccount = new Map<Id, Asset>();
+        Map<Id, Asset> assetsByAccountId = new Map<Id, Asset>();
         for (Asset asset : [SELECT AccountId FROM Asset WHERE AccountId IN :accountByParkId.values()]) {
-            assetsByAccount.put(asset.AccountId, asset);
+            assetsByAccountId.put(asset.AccountId, asset);
         }
+
+        List<ServiceAppointment> appointsToInsert = new List<ServiceAppointment>();
         Set<Id> parkIds = new Set<Id>();
-        for (Adventure_Park__c each : newList) {
-            Adventure_Park__c oldRecord;
-            if (oldmap != null && !oldmap.isEmpty()) {
-                oldRecord = oldmap.get(each.Id);
-            }
-            if (each.Is_Active__c && Trigger.isInsert) {
-                Account account = accountByParkId.get(each.Id);
-                ServiceAppointment newRecord = new ServiceAppointment();
-                newRecord.ParentRecordId = assetsByAccount.get(account.Id).Id;
-                newRecord.Status = each.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled';
-                newRecord.EarliestStartTime = Datetime.newInstance(each.Open_Date__c, Time.newInstance(9, 0, 0, 0));
-                newRecord.DueDate = Datetime.newInstance(each.Open_Date__c, Time.newInstance(9, 0, 0, 0)).addDays(7);
-                newRecord.Subject = 'Opening Day Party Kickoff!';
-                InsertList.add(newRecord);
+        for (Adventure_Park__c newPark : newParks) {
+            Adventure_Park__c oldPark = oldParksById.get(newPark.Id);
+
+            if (newPark.Is_Active__c && Trigger.isInsert) {
+                Account account = accountByParkId.get(newPark.Id);
+                appointsToInsert.add(createServiceAppointment(assetsByAccountId, account, newPark));
             }
 
-            if (oldRecord != null && (each.Is_Active__c != oldRecord.Is_Active__c)) {
-                parkIds.add(each.Id);
-
+            if (oldPark != null && (newPark.Is_Active__c != oldPark.Is_Active__c)) {
+                parkIds.add(newPark.Id);
             }
         }
-        System.debug('@@###' + mapOfParkIdtoAppointment);
-        for (ServiceAppointment each : [SELECT Id, Account.Adventure_Park__c, Status FROM ServiceAppointment WHERE Account.Adventure_Park__c IN :parkIds]) {
-            mapOfParkIdtoAppointment.put(each.Account.Adventure_Park__c, each);
+
+        Map<Id, ServiceAppointment> existingAppointByParkId = new Map<Id, ServiceAppointment>();
+        for (ServiceAppointment appointment : [
+            SELECT Id, Account.Adventure_Park__c, Status
+            FROM ServiceAppointment
+            WHERE Account.Adventure_Park__c IN :parkIds
+        ]) {
+            existingAppointByParkId.put(appointment.Account.Adventure_Park__c, appointment);
         }
-        for (Adventure_Park__c each : newList) {
-            Adventure_Park__c oldRecord;
-            if (oldmap != null && !oldmap.isEmpty()) {
-                oldRecord = oldmap.get(each.Id);
-                if ((!each.Is_Active__c && oldRecord.Is_Active__c) &&
-                    mapOfParkIdtoAppointment != null &&
-                    !mapOfParkIdtoAppointment.isEmpty() &&
-                    mapOfParkIdtoAppointment.containsKey(each.Id)
-                ) {
-                    ServiceAppointment updateRecord = mapOfParkIdtoAppointment.get(each.Id);
-                    updateRecord.Status = 'None';
-                    UpdateList.add(updateRecord);
-                }
-                if ((each.Is_Active__c && !oldRecord.Is_Active__c)) {
-                    if (mapOfParkIdtoAppointment != null && !mapOfParkIdtoAppointment.isEmpty() && mapOfParkIdtoAppointment.containsKey(each.Id)) {
-                        ServiceAppointment updateRecord = mapOfParkIdtoAppointment.get(each.Id);
-                        updateRecord.Status = each.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled';
-                        UpdateList.add(updateRecord);
-                    } else {
-                        Account account = accountByParkId.get(each.Id);
-                        ServiceAppointment newRecord = new ServiceAppointment();
-                        newRecord.ParentRecordId = assetsByAccount.get(account.Id).Id;
-                        newRecord.Status = each.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled';
-                        newRecord.EarliestStartTime = Datetime.newInstance(each.Open_Date__c, Time.newInstance(9, 0, 0, 0));
-                        newRecord.DueDate = Datetime.newInstance(each.Open_Date__c, Time.newInstance(9, 0, 0, 0)).addDays(7);
-                        newRecord.Subject = 'Opening Day Party Kickoff!';
-                        InsertList.add(newRecord);
-                    }
+
+        List<ServiceAppointment> appointsToUpdate = new List<ServiceAppointment>();
+        for (Adventure_Park__c newPark : newParks) {
+            Adventure_Park__c oldRecord = oldParksById.get(newPark.Id);
+
+            if ((!newPark.Is_Active__c && oldRecord.Is_Active__c) &&
+                existingAppointByParkId != null &&
+                !existingAppointByParkId.isEmpty() &&
+                existingAppointByParkId.containsKey(newPark.Id)
+            ) {
+                ServiceAppointment updateRecord = existingAppointByParkId.get(newPark.Id);
+                updateRecord.Status = 'None';
+                appointsToUpdate.add(updateRecord);
+            }
+
+            if ((newPark.Is_Active__c && !oldRecord.Is_Active__c)) {
+                //todo: this code should never execute, unless there is other automation that creates Appointments
+                if (existingAppointByParkId.containsKey(newPark.Id)) {
+                    ServiceAppointment updateRecord = existingAppointByParkId.get(newPark.Id);
+                    updateRecord.Status = newPark.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled';
+                    appointsToUpdate.add(updateRecord);
+                } else {
+                    Account account = accountByParkId.get(newPark.Id);
+                    appointsToInsert.add(createServiceAppointment(assetsByAccountId, account, newPark));
                 }
             }
         }
-        if (InsertList != null && !InsertList.isEmpty()) {
-            insert InsertList;
+        if (appointsToInsert != null && !appointsToInsert.isEmpty()) {
+            insert appointsToInsert;
         }
-        if (UpdateList != null && !UpdateList .isEmpty()) {
-            update UpdateList ;
+        if (appointsToUpdate != null && !appointsToUpdate .isEmpty()) {
+            update appointsToUpdate ;
         }
+    }
+
+    private static ServiceAppointment createServiceAppointment(Map<Id, Asset> assetsByAccountId, Account account, Adventure_Park__c newPark) {
+        ServiceAppointment appointment = new ServiceAppointment(
+            ParentRecordId = assetsByAccountId.get(account.Id).Id,
+            Status = newPark.Open_Date__c == Date.today() ? 'In Progress' : 'Scheduled',
+            EarliestStartTime = Datetime.newInstance(newPark.Open_Date__c, Time.newInstance(9, 0, 0, 0)),
+            DueDate = Datetime.newInstance(newPark.Open_Date__c, Time.newInstance(9, 0, 0, 0)).addDays(7),
+            Subject = 'Opening Day Party Kickoff!'
+        );
+        return appointment;
     }
 }
