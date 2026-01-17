@@ -55,9 +55,12 @@ public with sharing class AdventureParkTrigger_Handler {
 
     public static void onAfterUpdate(Map<Id, Adventure_Park__c> newParksById, Map<Id, Adventure_Park__c> oldParksById) {
         Map<Id, Date> deactivatedDatesByParkId = new Map<Id, Date>();
+        List<Adventure_Park__c> activeParks = new List<Adventure_Park__c>();
+        List<Adventure_Park__c> inactiveParks = new List<Adventure_Park__c>();
         for (Id parkId : newParksById.keySet()) {
             Adventure_Park__c newPark = newParksById.get(parkId);
             Adventure_Park__c oldPark = oldParksById.get(parkId);
+
             if (newPark.Open_Date__c < Date.today() &&
                 newPark.Is_Active__c != oldPark.Is_Active__c &&
                 !newPark.Is_Active__c &&
@@ -65,10 +68,26 @@ public with sharing class AdventureParkTrigger_Handler {
             ) {
                 deactivatedDatesByParkId.put(parkId, newPark.Inactivated_Date__c);
             }
+
+            if (newPark.Is_Active__c != oldPark.Is_Active__c) {
+                if (newPark.Is_Active__c) {
+                    activeParks.add(newPark);
+                } else {
+                    inactiveParks.add(newPark);
+                }
+            }
         }
 
         if (!deactivatedDatesByParkId.isEmpty()) {
             AdventureParkTrigger_Helper.deactivateRelatedPOI(deactivatedDatesByParkId);
+        }
+
+        if (!activeParks.isEmpty()) {
+            AdventureParkTrigger_Helper.createServiceAppointments(activeParks);
+        }
+
+        if (!inactiveParks.isEmpty()) {
+            AdventureParkTrigger_Helper.deactivateRelatedServiceAppointments(inactiveParks);
         }
     }
 }

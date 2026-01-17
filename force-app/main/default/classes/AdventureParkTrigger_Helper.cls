@@ -154,4 +154,18 @@ public with sharing class AdventureParkTrigger_Helper {
         }
         insert serviceAppointments;
     }
+
+    //@test: should_create_Service_Appointment_when_existing_Park_with_an_Open_Date_becomes_Active
+    public static void deactivateRelatedServiceAppointments(List<Adventure_Park__c> parks) {
+        List<ServiceAppointment> appointmentsToUpdate = new List<ServiceAppointment>();
+        for (ServiceAppointment appointment : [
+            SELECT Id, Account.Adventure_Park__c, Status
+            FROM ServiceAppointment
+            WHERE Account.Adventure_Park__c IN :parks
+        ]) {
+            appointment.Status = 'None';
+            appointmentsToUpdate.add(appointment);
+        }
+        update appointmentsToUpdate;
+    }
 }

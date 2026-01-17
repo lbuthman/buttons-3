@@ -15,8 +15,6 @@
         <members>ParkTourTrigger_Test</members>
         <members>TempLeadTrigger_Handler</members>
         <members>TempLeadTrigger_Test</members>
-        <members>ServiceAppointmentHandler</members>
-        <members>ServiceAppointmentHandler_Test</members>
         <name>ApexClass</name>
     </types>
     <types>
