@@ -17,6 +17,8 @@
         <members>TempLeadTrigger_Test</members>
         <members>SOQL_AdventurePark</members>
         <members>SOQ_POI</members>
+        <members>DML</members>
+        <members>DML_Test</members>
         <name>ApexClass</name>
     </types>
     <types>
